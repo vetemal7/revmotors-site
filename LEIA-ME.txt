@@ -1,0 +1,19 @@
+REVMOTORS — SITE EDITÁVEL
+
+1. Abra o arquivo index.html no navegador para visualizar o site.
+2. Para editar textos, abra index.html no Bloco de Notas ou VS Code.
+3. Procure os textos que deseja trocar e salve o arquivo.
+4. Para publicar e obter um link HTTPS:
+   - Entre em https://app.netlify.com/drop
+   - Crie/entre em sua conta Netlify.
+   - Envie a pasta "revmotors_site" (ou arraste a pasta para a área indicada).
+   - O Netlify publica o site e fornece um endereço HTTPS.
+   - Nas configurações do site, você pode alterar o nome do endereço.
+
+PERSONALIZE ANTES DE PUBLICAR:
+- Troque o telefone fictício (91) 99999-9999 e o link wa.me/5591999999999.
+- Confirme Instagram, localização, horário e informações da empresa.
+- Os veículos e imagens são exemplos ilustrativos; substitua pelos carros reais da empresa.
+- As imagens e fontes são carregadas da internet, então precisam de conexão.
+
+O site é um modelo demonstrativo. Não representa uma empresa real verificada.

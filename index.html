@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RevMotors — clássicos que merecem uma nova estrada. Compra, restauração e venda de carros antigos.">
+  <title>RevMotors | Clássicos que merecem uma nova estrada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #211d19; --paper: #f2eadb; --cream: #e6d8c1;
+      --red: #9e3828; --gold: #c49a54; --muted: #766d60;
+      --line: rgba(33,29,25,.18); --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .topline { height: 7px; background: repeating-linear-gradient(90deg,var(--red) 0 28px,var(--gold) 28px 56px,var(--ink) 56px 84px); }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(242,234,219,.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { max-width: var(--max); margin: auto; padding: 17px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:11px; font-family:"DM Mono",monospace; font-weight:500; letter-spacing:.08em; }
+    .brand-mark { width:39px; height:39px; display:grid; place-items:center; background:var(--red); color:var(--paper); border-radius:50%; font-family:"Playfair Display",serif; font-size:22px; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--gold); }
+    .brand small { display:block; font-size:9px; letter-spacing:.2em; color:var(--muted); margin-top:3px; }
+    nav { display:flex; gap:27px; align-items:center; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
+    nav a:hover { color:var(--red); }
+    .nav-cta { padding:12px 16px; color:var(--paper); background:var(--red); border:1px solid var(--ink); box-shadow:3px 3px 0 var(--ink); }
+    .hero { min-height:640px; display:grid; grid-template-columns:1fr 1fr; max-width:var(--max); margin:auto; padding:65px 24px 75px; align-items:center; gap:45px; }
+    .eyebrow { font-family:"DM Mono",monospace; color:var(--red); letter-spacing:.16em; font-size:11px; text-transform:uppercase; }
+    h1,h2,h3 { font-family:"Playfair Display",serif; }
+    h1 { font-size:clamp(48px,6.5vw,82px); line-height:.98; letter-spacing:-.045em; margin:22px 0; max-width:590px; }
+    h1 em { color:var(--red); font-style:normal; }
+    .hero p { max-width:460px; color:#5f574d; line-height:1.8; font-size:15px; }
+    .actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:30px; }
+    .btn { display:inline-block; padding:15px 20px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.12em; border:1px solid var(--ink); }
+    .btn.primary { color:var(--paper); background:var(--red); box-shadow:4px 4px 0 var(--ink); }
+    .btn.secondary { background:transparent; }
+    .hero-art { position:relative; }
+    .hero-art img { width:100%; height:440px; object-fit:cover; filter:sepia(.23) contrast(1.05); border:1px solid var(--ink); box-shadow:12px 12px 0 var(--gold); }
+    .stamp { position:absolute; right:-18px; bottom:25px; background:var(--red); color:var(--paper); border:2px solid var(--paper); outline:1px solid var(--red); width:116px; height:116px; border-radius:50%; display:grid; place-items:center; text-align:center; font-family:"DM Mono",monospace; font-size:10px; line-height:1.5; transform:rotate(10deg); }
+    .ticker { background:var(--ink); color:var(--paper); padding:14px 0; overflow:hidden; white-space:nowrap; font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.16em; }
+    .ticker span { color:var(--gold); padding:0 20px; }
+    section { padding:88px 24px; }
+    .wrap { max-width:var(--max); margin:auto; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:34px; }
+    h2 { font-size:clamp(36px,4vw,52px); line-height:1.05; margin:12px 0 0; letter-spacing:-.035em; }
+    .section-head p { color:var(--muted); max-width:360px; line-height:1.7; font-size:13px; }
+    .cars { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .car-card { border:1px solid var(--line); background:#eee4d3; }
+    .car-card img { width:100%; height:220px; object-fit:cover; display:block; filter:sepia(.18); }
+    .car-info { padding:20px; }
+    .car-meta { font:10px "DM Mono",monospace; color:var(--red); letter-spacing:.13em; text-transform:uppercase; }
+    .car-info h3 { font-size:25px; margin:9px 0; }
+    .car-info p { color:var(--muted); font-size:12px; line-height:1.7; min-height:42px; }
+    .car-bottom { border-top:1px solid var(--line); padding-top:14px; margin-top:15px; display:flex; justify-content:space-between; align-items:center; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    .car-bottom a { color:var(--red); }
+    .about { background:var(--ink); color:var(--paper); }
+    .about-grid { display:grid; grid-template-columns: .9fr 1.1fr; gap:75px; align-items:center; }
+    .about img { width:100%; height:430px; object-fit:cover; filter:sepia(.35); border:1px solid #88745a; }
+    .about p { color:#c8bcaa; line-height:1.9; font-size:14px; }
+    .about h2 { color:var(--paper); }
+    .values { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:35px; }
+    .value { border-top:1px solid #625648; padding-top:15px; }
+    .value b { color:var(--gold); font:11px "DM Mono",monospace; }
+    .value span { display:block; margin-top:8px; font-family:"Playfair Display",serif; font-size:18px; }
+    .services { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px; }
+    .service { background:var(--paper); padding:28px; }
+    .service .num { color:var(--red); font:12px "DM Mono",monospace; }
+    .service h3 { font-size:24px; margin:18px 0 8px; }
+    .service p { color:var(--muted); font-size:13px; line-height:1.75; }
+    .contact { background:var(--cream); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:55px; align-items:center; }
+    .contact p { color:var(--muted); line-height:1.8; font-size:14px; }
+    .contact-box { background:var(--paper); padding:30px; border:1px solid var(--ink); box-shadow:7px 7px 0 var(--red); }
+    .contact-row { padding:15px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:15px; font-size:13px; }
+    .contact-row:last-child { border:0; }
+    .contact-row span:first-child { color:var(--muted); }
+    footer { background:var(--ink); color:var(--paper); padding:28px 24px; }
+    .foot { max-width:var(--max); margin:auto; display:flex; justify-content:space-between; gap:20px; align-items:center; font:10px "DM Mono",monospace; color:#b8aa97; letter-spacing:.08em; }
+    .foot strong { color:var(--paper); }
+    @media(max-width:760px) {
+      nav { gap:12px; } nav a:not(.nav-cta) { display:none; }
+      .hero,.about-grid,.contact-grid { grid-template-columns:1fr; }
+      .hero { padding-top:48px; gap:38px; }
+      .hero-art img { height:310px; }
+      .stamp { right:-5px; width:95px; height:95px; }
+      .cars,.services { grid-template-columns:1fr; }
+      .section-head { display:block; }
+      .about-grid { gap:35px; }
+      .about img { height:300px; }
+      .values { grid-template-columns:1fr; }
+      section { padding:65px 20px; }
+      .foot { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#inicio"><span class="brand-mark">R</span><span>REVMOTORS<small>GARAGE & CLASSICS</small></span></a>
+      <nav>
+        <a href="#estoque">Clássicos</a><a href="#sobre">Nossa história</a><a href="#servicos">O que fazemos</a>
+        <a class="nav-cta" href="#contato">Fale conosco</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div>
+        <div class="eyebrow">Desde 1998 · Paixão por clássicos</div>
+        <h1>O passado<br>merece uma<br><em>nova estrada.</em></h1>
+        <p>Na RevMotors, carros antigos ganham uma nova vida. Encontramos clássicos, cuidamos de cada detalhe e devolvemos às ruas máquinas que fizeram história.</p>
+        <div class="actions"><a class="btn primary" href="#estoque">Conheça os clássicos</a><a class="btn secondary" href="#sobre">Conheça a RevMotors</a></div>
+      </div>
+      <div class="hero-art">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85" alt="Carro clássico esportivo em estrada">
+        <div class="stamp">RESPEITO<br>À HISTÓRIA<br>★<br>REVMOTORS</div>
+      </div>
+    </section>
+
+    <div class="ticker">COMPRA DE CLÁSSICOS <span>✦</span> RESTAURAÇÃO COM HISTÓRIA <span>✦</span> VENDA DE RELÍQUIAS <span>✦</span> FEITO PARA DURAR <span>✦</span></div>
+
+    <section id="estoque">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Garagem RevMotors</div><h2>Ícones que nunca<br>saem de moda.</h2></div><p>Uma seleção de clássicos restaurados com cuidado, personalidade e respeito à originalidade.</p></div>
+        <div class="cars">
+          <article class="car-card">
+            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=85" alt="Carro clássico vermelho">
+            <div class="car-info"><div class="car-meta">Esportivo · Anos 70</div><h3>Chevrolet Opala</h3><p>Presença marcante, motor clássico e uma história que atravessa gerações.</p><div class="car-bottom"><span>Projeto RevMotors</span><a href="#contato">Tenho interesse ↗</a></div></div>
+          </article>
+          <article class="car-card">
+            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85" alt="Carro antigo em exposição">
+            <div class="car-info"><div class="car-meta">Clássico · Anos 60</div><h3>Volkswagen Fusca</h3><p>Um símbolo da cultura automotiva, restaurado para continuar rodando.</p><div class="car-bottom"><span>Projeto RevMotors</span><a href="#contato">Tenho interesse ↗</a></div></div>
+          </article>
+          <article class="car-card">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85" alt="Automóvel clássico">
+            <div class="car-info"><div class="car-meta">Colecionável · Anos 80</div><h3>Clássicos especiais</h3><p>Modelos selecionados para quem valoriza design, memória e autenticidade.</p><div class="car-bottom"><span>Novidades na garagem</span><a href="#contato">Consultar ↗</a></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="wrap about-grid">
+        <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1100&q=85" alt="Detalhe de automóvel clássico">
+        <div><div class="eyebrow">Mais que carros. Memórias.</div><h2>Paixão que se<br>vê em cada detalhe.</h2>
+          <p>A RevMotors nasceu da vontade de preservar histórias sobre rodas. Compramos carros antigos, avaliamos seu potencial e trabalhamos para recuperar sua beleza e personalidade.</p>
+          <p>Nosso compromisso é valorizar cada projeto — da pesquisa de peças ao acabamento final — para que cada clássico encontre alguém que continue sua história.</p>
+          <div class="values"><div class="value"><b>01 / RESGATAR</b><span>Encontramos relíquias</span></div><div class="value"><b>02 / RESTAURAR</b><span>Cuidamos dos detalhes</span></div><div class="value"><b>03 / REACENDER</b><span>Novas histórias na estrada</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="wrap"><div class="eyebrow">Do primeiro contato à próxima viagem</div><h2>O que fazemos.</h2>
+        <div class="services">
+          <div class="service"><div class="num">01 — COMPRA</div><h3>Seu clássico tem valor.</h3><p>Compramos carros antigos e projetos parados. Avaliamos cada veículo com atenção à conservação, originalidade e potencial.</p></div>
+          <div class="service"><div class="num">02 — RESTAURAÇÃO</div><h3>Respeito à originalidade.</h3><p>Planejamos a recuperação estética e mecânica para devolver vida ao automóvel sem apagar sua identidade.</p></div>
+          <div class="service"><div class="num">03 — VENDA</div><h3>Uma nova garagem.</h3><p>Apresentamos clássicos selecionados para apaixonados e colecionadores que procuram algo especial.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <div class="wrap contact-grid">
+        <div><div class="eyebrow">Vamos conversar?</div><h2>Seu próximo clássico<br>pode estar aqui.</h2><p>Quer vender seu carro antigo, conhecer nossos projetos ou encontrar uma relíquia para chamar de sua? Entre em contato com a equipe RevMotors.</p><a class="btn primary" href="https://wa.me/5591999999999" target="_blank" rel="noopener">Chamar no WhatsApp ↗</a></div>
+        <div class="contact-box"><div class="eyebrow">RevMotors · Garage & Classics</div><div class="contact-row"><span>WhatsApp</span><strong>(91) 99999-9999</strong></div><div class="contact-row"><span>Instagram</span><strong>@revmotors</strong></div><div class="contact-row"><span>Atendimento</span><strong>Seg — Sáb · 08h às 18h</strong></div><div class="contact-row"><span>Localização</span><strong>Belém — PA</strong></div></div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="foot"><span><strong>REVMOTORS</strong> · GARAGE & CLASSICS</span><span>CLÁSSICOS QUE MERECEM UMA NOVA ESTRADA.</span><span>© 2026 REVMOTORS</span></div></footer>
+</body>
+</html>
