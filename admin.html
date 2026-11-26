@@ -192,8 +192,7 @@ document.getElementById("formLogin")
         });
 
         if (error) {
-            mensagem.textContent =
-                "Não foi possível entrar. Verifique seus dados.";
+            mensagem.textContent = error.message;
             return;
         }
 
