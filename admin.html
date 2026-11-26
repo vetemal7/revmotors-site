@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevMotors | Administração</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080808;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 420px;
+    background: #111;
+    padding: 35px;
+    border: 1px solid #292929;
+    border-radius: 16px;
+}
+
+h1 {
+    letter-spacing: 4px;
+    text-align: center;
+}
+
+p {
+    color: #999;
+    text-align: center;
+    line-height: 1.5;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 8px 0;
+    background: #191919;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ccc;
+}
+
+button:disabled {
+    opacity: .5;
+}
+
+#mensagem {
+    font-size: 14px;
+    color: #ff7777;
+}
+
+a {
+    color: #aaa;
+}
+
+[hidden] {
+    display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>REVMOTORS</h1>
+
+    <section id="login">
+        <p>Área administrativa</p>
+
+        <form id="formLogin">
+            <input id="email" type="email"
+                placeholder="E-mail"
+                autocomplete="username" required>
+
+            <input id="senha" type="password"
+                placeholder="Senha"
+                autocomplete="current-password" required>
+
+            <button id="entrar" type="submit">
+                ENTRAR
+            </button>
+        </form>
+    </section>
+
+    <section id="painel" hidden>
+        <h2>Bem-vindo, administrador.</h2>
+        <p>Conexão com a RevMotors estabelecida.</p>
+
+        <p>Veículos cadastrados:
+            <strong id="total">--</strong>
+        </p>
+
+        <button id="sair">SAIR DA CONTA</button>
+    </section>
+
+    <p id="mensagem" role="status"></p>
+    <p><a href="/">Voltar ao site</a></p>
+
+</div>
+
+<script>
+const URL_SUPABASE =
+    "https://epjccwczgccpedpttfmq.supabase.co";
+
+const CHAVE_PUBLICA =
+    "COLE_SUA_CHAVE_PUBLICA_AQUI";
+
+const ADMIN_UID =
+    "05e4bc87-cb13-4679-905e-6f86e3bbdd4b";
+
+const banco = window.supabase.createClient(
+    URL_SUPABASE,
+    CHAVE_PUBLICA
+);
+
+const login = document.getElementById("login");
+const painel = document.getElementById("painel");
+const mensagem = document.getElementById("mensagem");
+
+async function verificarSessao() {
+    const { data, error } = await banco.auth.getUser();
+
+    if (error || !data.user) {
+        login.hidden = false;
+        painel.hidden = true;
+        return;
+    }
+
+    if (data.user.id !== ADMIN_UID) {
+        await banco.auth.signOut();
+        login.hidden = false;
+        painel.hidden = true;
+        mensagem.textContent = "Acesso não autorizado.";
+        return;
+    }
+
+    login.hidden = true;
+    painel.hidden = false;
+    mensagem.textContent = "";
+
+    const resultado = await banco
+        .from("veiculos")
+        .select("id", { count: "exact", head: true });
+
+    document.getElementById("total").textContent =
+        resultado.error ? "Erro na consulta" : resultado.count;
+}
+
+document.getElementById("formLogin")
+.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+
+    const botao = document.getElementById("entrar");
+    botao.disabled = true;
+    mensagem.textContent = "Conectando...";
+
+    try {
+        const { error } = await banco.auth.signInWithPassword({
+            email: document.getElementById("email").value,
+            password: document.getElementById("senha").value
+        });
+
+        if (error) {
+            mensagem.textContent =
+                "Não foi possível entrar. Verifique seus dados.";
+            return;
+        }
+
+        document.getElementById("senha").value = "";
+        await verificarSessao();
+
+    } catch (erro) {
+        mensagem.textContent = "Falha de conexão.";
+    } finally {
+        botao.disabled = false;
+    }
+});
+
+document.getElementById("sair")
+.addEventListener("click", async () => {
+    const { error } = await banco.auth.signOut();
+
+    if (error) {
+        mensagem.textContent = "Não foi possível sair.";
+        return;
+    }
+
+    login.hidden = false;
+    painel.hidden = true;
+    mensagem.textContent = "";
+});
+
+verificarSessao();
+</script>
+
+</body>
+</html>
