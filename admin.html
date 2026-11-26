@@ -221,6 +221,30 @@ document.getElementById("sair")
 });
 
 verificarSessao();
+    banco.auth.onAuthStateChange((event) => {
+    if (event === "PASSWORD_RECOVERY") {
+        setTimeout(async () => {
+            const novaSenha = prompt("Digite sua nova senha:");
+
+            if (!novaSenha || novaSenha.length < 8) {
+                alert("Use pelo menos 8 caracteres.");
+                return;
+            }
+
+            const { error } = await banco.auth.updateUser({
+                password: novaSenha
+            });
+
+            if (error) {
+                alert(error.message);
+            } else {
+                alert("Senha alterada com sucesso!");
+                await banco.auth.signOut();
+                window.location.href = "/admin.html";
+            }
+        }, 0);
+    }
+});
 </script>
 
 </body>
